@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: yourName
+      changes:
+        - sql:
+            # Здесь должен быть SQL запрос для вставки 10000 случайных значений.
+            # Пример для PostgreSQL:
+            sql: |
+              INSERT INTO file (title, creation_date, description, data)
+              SELECT
+                md5(random()::text),
+                ('2000-01-01'::date + ((random() * ((current_date - '2000-01-01')::integer)) || ' days')::interval),
+                md5(random()::text),
+                md5(random()::text)
+              FROM generate_series(1, 10000);

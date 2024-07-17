@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeset/create-files-table.yml
+  - include:
+      file: db/changelog/changeset/insert-random-data.yml

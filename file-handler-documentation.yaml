@@ -1,0 +1,123 @@
+openapi: "3.0.3"
+info:
+  title: "Документация к микросервису"
+  version: "1.0.0"
+servers:
+  - url: "https://localhost:8081"
+paths:
+  /api/v1/files:
+    post:
+      summary: "Добавление нового файла"
+      operationId: "createFile"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateFileRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "integer"
+                format: "int64"
+    get:
+      summary: "Получение всех файлов с пагинацией"
+      operationId: "getAllByPageAndLimit"
+      parameters:
+        - name: "page"
+          in: "query"
+          required: false
+          schema:
+            type: "integer"
+            format: "int32"
+            default: "1"
+        - name: "limit"
+          in: "query"
+          required: false
+          schema:
+            type: "integer"
+            format: "int32"
+            default: "5"
+        - name: "sortDirection"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+            enum:
+              - "ASC"
+              - "DESC"
+            default: "DESC"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PageFilesResponse"
+  /api/v1/files/{fileId}:
+    get:
+      summary: "Получить файл по его Id"
+      operationId: "getFileById"
+      parameters:
+        - name: "fileId"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/FileResponse"
+components:
+  schemas:
+    CreateFileRequest:
+      type: "object"
+      properties:
+        title:
+          type: "string"
+        creation_date:
+          type: "string"
+          format: "date-time"
+        description:
+          type: "string"
+        file:
+          type: "string"
+      required:
+        - "creationDate"
+    FileResponse:
+      type: "object"
+      properties:
+        title:
+          type: "string"
+        creation_date:
+          type: "string"
+          format: "date-time"
+        description:
+          type: "string"
+        file:
+          type: "string"
+      required:
+        - "creationDate"
+    PageFilesResponse:
+      type: "object"
+      properties:
+        total_files:
+          type: "integer"
+          format: "int64"
+        total_pages:
+          type: "integer"
+          format: "int32"
+        current_page:
+          type: "integer"
+          format: "int32"
+        files:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/FileResponse"
