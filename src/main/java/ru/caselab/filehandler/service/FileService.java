@@ -25,6 +25,10 @@ public class FileService {
     }
 
     public Page<File> findPage(PageRequest request) {
+        Page<File> page = fileRepository.findAll(request);
+        if (page.getTotalElements() == 0) {
+            throw new NoSuchElementException("На данный момент нет сохраненных файлов");
+        }
         return fileRepository.findAll(request);
     }
 }

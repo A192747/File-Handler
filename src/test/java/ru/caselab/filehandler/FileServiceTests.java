@@ -73,6 +73,19 @@ public class FileServiceTests {
     }
 
     @Test
+    @DisplayName("Find page with no files")
+    void findPageWithNoFiles() {
+        List<File> files = new ArrayList<>();
+        Page<File> page = new PageImpl<>(files);
+        PageRequest pageRequest = PageRequest.of(0, 10);
+
+        when(fileRepository.findAll(pageRequest)).thenReturn(page);
+
+        assertThrows(NoSuchElementException.class, () -> fileService.findPage(pageRequest));
+        verify(fileRepository, times(1)).findAll(pageRequest);
+    }
+
+    @Test
     @DisplayName("Find page")
     void findPage() {
         List<File> files = new ArrayList<>();
