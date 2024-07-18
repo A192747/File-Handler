@@ -36,6 +36,12 @@
 
 Также есть GlobalExceptionHandler, который ловит ошибки и в зависимости от их класса возвращает различные статусы + текст ошибки
 
+Были написаны тесты для следующих классов:
+* [FileController](https://github.com/A192747/File-Handler/blob/main/src/test/java/ru/caselab/filehandler/FileControllerTests.java)
+* [FileMapperImpl](https://github.com/A192747/File-Handler/blob/main/src/test/java/ru/caselab/filehandler/FileMapperTests.java)
+* [FileModel](https://github.com/A192747/File-Handler/blob/main/src/test/java/ru/caselab/filehandler/FileModelTests.java)
+* [FileService](https://github.com/A192747/File-Handler/blob/main/src/test/java/ru/caselab/filehandler/FileServiceTests.java)
+
 
 ### API-методы
 #### Создание файла:
