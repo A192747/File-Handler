@@ -11,7 +11,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class FileModelTests {
     @Test
-    @DisplayName("creation file model")
+    @DisplayName("Create file model")
     public void testFileCreation() {
         Date now = new Date();
         File file = new File();

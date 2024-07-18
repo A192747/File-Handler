@@ -40,10 +40,6 @@ class FileControllerTests {
     @Autowired
     private FileController fileController;
 
-    @BeforeEach
-    void setUp() {
-    }
-
     @Test
     @DisplayName("File creation")
     void testCreateFile() {
